@@ -1,0 +1,27 @@
+{
+    "name": "rych/random",
+    "type": "library",
+    "description": "Random data generator for PHP",
+    "keywords": ["random"],
+    "homepage": "https://bitbucket.org/rchouinard/rych-random",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ryan Chouinard",
+            "email": "rchouinard@gmail.com",
+            "homepage": "http://ryanchouinard.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.7"
+    },
+    "suggest": {
+        "ext-mcrypt": "*",
+        "ext-openssl": "*"
+    },
+    "autoload": {
+        "psr-0" : {
+            "Rych" : "src/"
+        }
+    }
+}

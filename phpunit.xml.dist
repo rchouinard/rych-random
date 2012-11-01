@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" verbose="true">
-    <php>
-        <includePath>./src</includePath>
-    </php>
+<phpunit colors="true" verbose="true" bootstrap="tests/bootstrap.php">
     <testsuites>
         <testsuite name="Rych\Random Tests">
-            <directory suffix="Test.php" phpVersion="5.3.8" phpVersionOperator=">=">./tests/src</directory>
+            <directory suffix="Test.php" phpVersion="5.3.8" phpVersionOperator=">=">./tests</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">./src</directory>
-        </whitelist>
-    </filter>
 </phpunit>

@@ -61,7 +61,7 @@ class Generator
             if (PHP_OS & "\xDF\xDF\xDF" == 'WIN') {
                 if (extension_loaded('com_dotnet')) {
                     $this->source = new \Rych\Random\Source\CAPICOM;
-                if (extension_loaded('mcrypt')) {
+                } if (extension_loaded('mcrypt')) {
                     $this->source = new \Rych\Random\Source\MCrypt;
                 // openssl_random_pseudo_bytes() on windows pre-php 5.3.4
                 // has potential blocking behavior, so we avoid it. After

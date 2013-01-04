@@ -54,16 +54,35 @@ class Generator
     {
         // Kind of a hack for now; this needs to be more dynamic.
         if (!$this->source) {
-            if (extension_loaded('openssl')) {
-                $this->source = new \Rych\Random\Source\OpenSSL;
-            } else if (extension_loaded('mcrypt')) {
-                $this->source = new \Rych\Random\Source\MCrypt;
-            } else if (extension_loaded('com_dotnet')) {
-                $this->source = new \Rych\Random\Source\CAPICOM;
-            } else if (is_readable('/dev/urandom')) {
-                $this->source = new \Rych\Random\Source\URandom;
+            // Default, no special requirements or dependencies.
+            $this->source = new \Rych\Random\Source\MTRand;
+
+            // Windows platform preferrences
+            if (PHP_OS & "\xDF\xDF\xDF" == 'WIN') {
+                if (extension_loaded('com_dotnet')) {
+                    $this->source = new \Rych\Random\Source\CAPICOM;
+                if (extension_loaded('mcrypt')) {
+                    $this->source = new \Rych\Random\Source\MCrypt;
+                // openssl_random_pseudo_bytes() on windows pre-php 5.3.4
+                // has potential blocking behavior, so we avoid it. After
+                // php 5.3.4, openssl_random_pseudo_bytes() is essentially
+                // the same as mcrypt_create_iv(). I'm only using it here in
+                // case mcrypt is not available but openssl is.
+                } else if (extension_loaded('openssl') && version_compare(PHP_VERSION, '5.3.4', '>=')) {
+                    $this->source = new \Rych\Random\Source\OpenSSL;
+                }
             } else {
-                $this->source = new \Rych\Random\Source\MTRand;
+                if (extension_loaded('openssl')) {
+                    $this->source = new \Rych\Random\Source\OpenSSL;
+                } else if (is_readable('/dev/urandom')) {
+                    $this->source = new \Rych\Random\Source\URandom;
+                // mcrypt_create_iv() with MCRYPT_DEV_URANDOM, as used in this
+                // source, basically reads from /dev/urandom but much slower
+                // than doing so directly. This is included in case we can't
+                // read /dev/urandom directly for some reason.
+                } else if (extension_loaded('mcrypt')) {
+                    $this->source = new \Rych\Random\Source\MCrypt;
+                }
             }
         }
 

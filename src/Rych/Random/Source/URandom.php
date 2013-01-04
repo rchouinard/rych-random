@@ -43,27 +43,15 @@ class URandom implements Source
      */
     public function read($bytes)
     {
-        $out = '';
-        $remaining = $bytes;
+        $handle = fopen('/dev/urandom', 'rb');
+        if ($handle && function_exists('stream_set_read_buffer')) {
+            stream_set_read_buffer($handle, 0);
+        }
 
-        $urand = fopen('/dev/urandom', 'rb');
-        stream_set_read_buffer($urand, 0);
+        $data = fread($handle, $bytes);
 
-        do {
-            $read = ($remaining > 20) ? 20 : $remaining;
-            $remaining -= $read;
-
-            $entropy = rand() . uniqid(mt_rand(), true);
-            $entropy .= implode('', fstat(fopen(__FILE__, 'r')));
-            $entropy .= memory_get_usage();
-            $entropy .= fread($urand, $read);
-
-            $out .= sha1($entropy, true);
-        } while ($bytes > strlen($out));
-
-        fclose($urand);
-
-        return substr($out, 0, $bytes);
+        fclose($handle);
+        return $data;
     }
 
 }

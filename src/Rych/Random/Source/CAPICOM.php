@@ -14,14 +14,14 @@ use Rych\Random\Source;
 use Rych\Random\Exception\UnsupportedSourceException;
 
 /**
- * OpenSSL Source
+ * CAPICOM Source
  *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
  * @copyright Copyright (c) 2013, Ryan Chouinard
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
-class OpenSSL implements Source
+class CAPICOM implements Source
 {
 
     /**
@@ -30,8 +30,8 @@ class OpenSSL implements Source
      */
     public function __construct()
     {
-        if (!extension_loaded('openssl')) {
-            throw new UnsupportedSourceException('The openssl extension is not loaded');
+        if (!extension_loaded('com_dotnet')) {
+            throw new UnsupportedSourceException('The COM/.Net extension is not loaded');
         }
     }
 
@@ -43,7 +43,10 @@ class OpenSSL implements Source
      */
     public function read($bytes)
     {
-        return openssl_random_pseudo_bytes($bytes);
+        $util = new \COM('CAPICOM.Utilities.1');
+        $data = base64_decode($util->GetRandom($bytes, 0));
+
+        return str_pad($data, $bytes, chr(0));
     }
 
 }

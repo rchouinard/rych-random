@@ -3,6 +3,9 @@
 .buildpath
 .project
 
+# NetBeans
+nbproject/
+
 # PHPUnit
 phpunit.xml
 logs/

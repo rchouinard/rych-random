@@ -2,9 +2,9 @@
 
 namespace Rych\Random\Source;
 
-use Rych\Random\Source\URandom;
+use Rych\Random\Source\DevURandom;
 
-class URandomTest extends \PHPUnit_Framework_TestCase
+class DevURandomTest extends \PHPUnit_Framework_TestCase
 {
 
     private $source;
@@ -16,7 +16,7 @@ class URandomTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->source = new URandom;
+        $this->source = new DevURandom;
     }
 
     public function testRead()

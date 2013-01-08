@@ -14,24 +14,56 @@ use Rych\Random\Source;
 use Rych\Random\Exception\UnsupportedSourceException;
 
 /**
- * URandom Source
+ * /dev/urandom Source
  *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
  * @copyright Copyright (c) 2013, Ryan Chouinard
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
-class URandom implements Source
+class DevURandom implements Source
 {
 
     /**
+     * @var string
+     */
+    protected $source = '/dev/urandom';
+
+    /**
+     * @var resource
+     */
+    private $handle;
+
+    /**
+     * Class constructor
+     *
      * @return void
      * @throws UnsupportedSourceException
      */
     public function __construct()
     {
-        if (!file_exists('/dev/urandom') || !is_readable('/dev/urandom')) {
-            throw new UnsupportedSourceException('Cannot read from /dev/urandom');
+        $src = $this->source;
+        if (!file_exists($src) || !is_readable($src)) {
+            throw new UnsupportedSourceException("Cannot read from '$src'");
+        }
+
+        $this->handle = @fopen($src, 'rb');
+        if (!$this->handle) {
+            throw new UnsupportedSourceException("Could not open '$src' for reading");
+        } else if (function_exists('stream_set_read_buffer')) {
+            stream_set_read_buffer($handle, 0);
+        }
+    }
+
+    /**
+     * Class destructor
+     *
+     * @return void
+     */
+    public function __destruct()
+    {
+        if ($this->handle) {
+            fclose($this->handle);
         }
     }
 
@@ -43,15 +75,7 @@ class URandom implements Source
      */
     public function read($bytes)
     {
-        $handle = fopen('/dev/urandom', 'rb');
-        if ($handle && function_exists('stream_set_read_buffer')) {
-            stream_set_read_buffer($handle, 0);
-        }
-
-        $data = fread($handle, $bytes);
-
-        fclose($handle);
-        return $data;
+        return fread($handle, $bytes);
     }
 
 }

@@ -75,7 +75,7 @@ class Generator
                 if (extension_loaded('openssl')) {
                     $this->source = new \Rych\Random\Source\OpenSSL;
                 } else if (is_readable('/dev/urandom')) {
-                    $this->source = new \Rych\Random\Source\URandom;
+                    $this->source = new \Rych\Random\Source\DevURandom;
                 // mcrypt_create_iv() with MCRYPT_DEV_URANDOM, as used in this
                 // source, basically reads from /dev/urandom but much slower
                 // than doing so directly. This is included in case we can't

@@ -25,6 +25,13 @@ class CAPICOM implements Source
 {
 
     /**
+     * @var COM
+     */
+    private $utils;
+
+    /**
+     * Class constructor
+     *
      * @return void
      * @throws UnsupportedSourceException
      */
@@ -32,6 +39,12 @@ class CAPICOM implements Source
     {
         if (!extension_loaded('com_dotnet')) {
             throw new UnsupportedSourceException('The COM/.Net extension is not loaded');
+        }
+
+        try {
+            $this->utils = new \COM('CAPICOM.Utilities.1');
+        } catch (com_exception $e) {
+            throw new UnsupportedSourceException('Required interface is not available on this system', null, $e);
         }
     }
 
@@ -43,9 +56,7 @@ class CAPICOM implements Source
      */
     public function read($bytes)
     {
-        $util = new \COM('CAPICOM.Utilities.1');
-        $data = base64_decode($util->GetRandom($bytes, 0));
-
+        $data = base64_decode($this->utils->GetRandom($bytes, 0));
         return str_pad($data, $bytes, chr(0));
     }
 

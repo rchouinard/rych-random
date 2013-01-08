@@ -51,7 +51,7 @@ class DevURandom implements Source
         if (!$this->handle) {
             throw new UnsupportedSourceException("Could not open '$src' for reading");
         } else if (function_exists('stream_set_read_buffer')) {
-            stream_set_read_buffer($handle, 0);
+            stream_set_read_buffer($this->handle, 0);
         }
     }
 
@@ -75,7 +75,7 @@ class DevURandom implements Source
      */
     public function read($bytes)
     {
-        return fread($handle, $bytes);
+        return fread($this->handle, $bytes);
     }
 
 }

@@ -25,6 +25,8 @@ class MCrypt implements Source
 {
 
     /**
+     * Class constructor
+     *
      * @return void
      * @throws UnsupportedSourceException
      */

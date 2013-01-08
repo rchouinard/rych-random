@@ -2,9 +2,8 @@
 
 use Rych\Random\Generator;
 use Rych\Random\Source\MCrypt as MCryptSource;
-use Rych\Random\Source\MTRand as MTRandSource;
+use Rych\Random\Source\Native as NativeSource;
 use Rych\Random\Source\OpenSSL as OpenSSLSource;
-use Rych\Random\Source\URandom as URandomSource;
 use Rych\Random\Exception;
 
 class RandomGeneratorTest extends PHPUnit_Framework_TestCase
@@ -62,9 +61,9 @@ class RandomGeneratorTest extends PHPUnit_Framework_TestCase
                 $this->generator->getSource()
             );
 
-            $this->generator->setSource(new MTRandSource);
+            $this->generator->setSource(new NativeSource);
             $this->assertInstanceOf(
-                'Rych\Random\Source\MTRand',
+                'Rych\Random\Source\Native',
                 $this->generator->getSource()
             );
         } catch (Exception $e) {

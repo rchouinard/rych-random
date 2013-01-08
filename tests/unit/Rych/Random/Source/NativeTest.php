@@ -2,16 +2,16 @@
 
 namespace Rych\Random\Source;
 
-use Rych\Random\Source\MTRand;
+use Rych\Random\Source\Native;
 
-class MTRandTest extends \PHPUnit_Framework_TestCase
+class NativeTest extends \PHPUnit_Framework_TestCase
 {
 
     private $source;
 
     public function setUp()
     {
-        $this->source = new MTRand;
+        $this->source = new Native;
     }
 
     public function testRead()

@@ -55,7 +55,7 @@ class Generator
         // Kind of a hack for now; this needs to be more dynamic.
         if (!$this->source) {
             // Default, no special requirements or dependencies.
-            $this->source = new \Rych\Random\Source\MTRand;
+            $this->source = new \Rych\Random\Source\Native;
 
             // Windows platform preferrences
             if (PHP_OS & "\xDF\xDF\xDF" == 'WIN') {

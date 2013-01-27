@@ -2,7 +2,7 @@
 <phpunit colors="true" verbose="true" bootstrap="tests/bootstrap.php">
     <testsuites>
         <testsuite name="Rych\Random Tests">
-            <directory suffix="Test.php" phpVersion="5.3.8" phpVersionOperator=">=">./tests</directory>
+            <directory suffix="Test.php" phpVersion="5.3.4" phpVersionOperator=">=">./tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

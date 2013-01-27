@@ -13,21 +13,20 @@ namespace Rych\Random\Source;
 use Rych\Random\SourceInterface;
 
 /**
- * OpenSSL random data source
- *
- * This source requires the OpenSSL extension to be loaded in order to work.
- * It should be noted that this source does require PHP versions >= 5.3.7 on
- * Windows, due to a bug in the OpenSSL extension which could lead to very
- * slow performance or hangs under some circumstances.
- *
+ * /dev/urandom random data source
  *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
  * @copyright Copyright (c) 2013, Ryan Chouinard
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
-class OpenSSL implements SourceInterface
+class URandom implements SourceInterface
 {
+
+    /**
+     * @var string
+     */
+    protected $file = '/dev/urandom';
 
     /**
      * Generate a string of random data.
@@ -40,12 +39,16 @@ class OpenSSL implements SourceInterface
         $bytes = '';
 
         if (self::isSupported()) {
-            $sslStrong = false;
-            $sslBytes = openssl_random_pseudo_bytes($byteCount, $sslStrong);
-            if ($sslStrong) {
-                $bytes = $sslBytes;
+            if ($fp = @fopen($this->file, 'rb')) {
+                if (function_exists('stream_set_read_buffer')) {
+                    stream_set_read_buffer($fp, 0);
+                }
+
+                $fileBytes = fread($fp, $byteCount);
+                if ($fileBytes) {
+                    $bytes = $fileBytes;
+                }
             }
-            unset ($sslStrong);
         }
 
         return str_pad($bytes, $byteCount, chr(0));
@@ -54,26 +57,18 @@ class OpenSSL implements SourceInterface
     /**
      * Test system support for this source.
      *
-     * PHP versions prior to 5.3.7 have a bug in the Windows implementation of
-     * this source. The implementation used OpenSSL functions which could cause
-     * blocking for an indefinite period of time on headless non-interactive
-     * Windows servers. Because of this, the source is not supported for PHP
-     * versions < 5.3.7 on Windows.
-     *
-     * The OpenSSL function this source uses simply wraps Microsoft's CryptoAPI
-     * on PHP versions >= 5.3.7 on Windows. It should be noted that this is also
-     * exactly how the MCrypt source operates on Windows.
-     *
      * @return boolean Returns true if the source is supported on the current
      *     platform, otherwise false.
      */
     public static function isSupported()
     {
         $supported = false;
-        if (function_exists('openssl_random_pseudo_bytes')) {
-            if (version_compare(PHP_VERSION, '5.3.7') >= 0 || (PHP_OS & "\xDF\xDF\xDF") !== 'WIN') {
-                $supported = true;
-            }
+
+        $class = __CLASS__;
+        $self = new $class;
+
+        if (file_exists($self->file) && is_readable($self->file)) {
+            $supported = true;
         }
 
         return $supported;
@@ -87,7 +82,7 @@ class OpenSSL implements SourceInterface
      */
     public static function getPriority()
     {
-        return SourceInterface::PRIORITY_HIGH;
+        return SourceInterface::PRIORITY_MEDIUM;
     }
 
 }

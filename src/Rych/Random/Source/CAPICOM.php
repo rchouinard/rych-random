@@ -1,6 +1,6 @@
 <?php
 /**
- * Ryan Chouinard's Random Data Library
+ * Ryan's Random Data Library
  *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
@@ -10,54 +10,78 @@
 
 namespace Rych\Random\Source;
 
-use Rych\Random\Source;
-use Rych\Random\Exception\UnsupportedSourceException;
+use Rych\Random\SourceInterface;
 
 /**
- * CAPICOM Source
+ * CAPICOM random data source
+ *
+ * Microsoft has deprecated the CAPICOM interface. Please see
+ * {@link http://blogs.msdn.com/b/karinm/archive/2009/01/19/capicom-dll-removed-from-windows-sdk-for-windows-7.aspx
+ *  the MSDN announcement} for more information.
  *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
  * @copyright Copyright (c) 2013, Ryan Chouinard
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
-class CAPICOM implements Source
+class CAPICOM implements SourceInterface
 {
 
     /**
-     * @var COM
-     */
-    private $utils;
-
-    /**
-     * Class constructor
+     * Generate a string of random data.
      *
-     * @return void
-     * @throws UnsupportedSourceException
+     * @param integer $byteCount The desired number of bytes.
+     * @return string Returns the generated string.
      */
-    public function __construct()
+    public function getBytes($byteCount)
     {
-        if (!extension_loaded('com_dotnet')) {
-            throw new UnsupportedSourceException('The COM/.Net extension is not loaded');
+        $bytes = '';
+
+        if (self::isSupported()) {
+            try {
+                $util = new \COM('CAPICOM.Utilities.1');
+                $capicomBytes = base64_decode($util->GetRandom($byteCount, 0));
+                if ($capicomBytes) {
+                    $bytes = $capicomBytes;
+                }
+            } catch (\Exception $e) {
+            }
         }
 
-        try {
-            $this->utils = new \COM('CAPICOM.Utilities.1');
-        } catch (com_exception $e) {
-            throw new UnsupportedSourceException('Required interface is not available on this system', null, $e);
-        }
+        return str_pad($bytes, $byteCount, chr(0));
     }
 
     /**
-     * Read a raw random string from the generator source.
+     * Test system support for this source.
      *
-     * @param integer $bytes The number of bytes to read from the source.
-     * @return string A random string of bytes of the specified length.
+     * This source is only supported on Windows platforms when the COM extension
+     * is loaded.
+     *
+     * @return boolean Returns true if the source is supported on the current
+     *     platform, otherwise false.
      */
-    public function read($bytes)
+    public static function isSupported()
     {
-        $data = base64_decode($this->utils->GetRandom($bytes, 0));
-        return str_pad($data, $bytes, chr(0));
+        $supported = false;
+        if ((PHP_OS & "\xDF\xDF\xDF") === 'WIN' && class_exists('\\COM', false)) {
+            $supported = true;
+        }
+
+        return $supported;
+    }
+
+    /**
+     * Get the source priority.
+     *
+     * CAPICOM has been deprecated by Microsoft, and this source priority
+     * reflects this fact.
+     *
+     * @return integer Returns an integer indicating the priority of the source.
+     *     Lower numbers represent lower priorities.
+     */
+    public static function getPriority()
+    {
+        return SourceInterface::PRIORITY_MEDIUM;
     }
 
 }

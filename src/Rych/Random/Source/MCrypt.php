@@ -1,6 +1,6 @@
 <?php
 /**
- * Ryan Chouinard's Random Data Library
+ * Ryan's Random Data Library
  *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
@@ -10,42 +10,64 @@
 
 namespace Rych\Random\Source;
 
-use Rych\Random\Source;
-use Rych\Random\Exception\UnsupportedSourceException;
+use Rych\Random\SourceInterface;
 
 /**
- * MCrypt Source
+ * MCrypt random data source
  *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
  * @copyright Copyright (c) 2013, Ryan Chouinard
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
-class MCrypt implements Source
+class MCrypt implements SourceInterface
 {
 
     /**
-     * Class constructor
+     * Generate a string of random data.
      *
-     * @return void
-     * @throws UnsupportedSourceException
+     * @param integer $byteCount The desired number of bytes.
+     * @return string Returns the generated string.
      */
-    public function __construct()
+    public function getBytes($byteCount)
     {
-        if (!extension_loaded('mcrypt')) {
-            throw new UnsupportedSourceException('The mcrypt extension is not loaded');
+        $bytes = '';
+
+        if (self::isSupported()) {
+            $mcryptStr = mcrypt_create_iv($byteCount, MCRYPT_DEV_URANDOM);
+            if ($mcryptStr !== false) {
+                $bytes = $mcryptStr;
+            }
         }
+
+        return str_pad($bytes, $byteCount, chr(0));
     }
 
     /**
-     * Read a raw random string from the generator source.
+     * Test system support for this source.
      *
-     * @param integer $bytes The number of bytes to read from the source.
-     * @return string A random string of bytes of the specified length.
+     * @return boolean Returns true if the source is supported on the current
+     *     platform, otherwise false.
      */
-    public function read($bytes)
+    public static function isSupported()
     {
-        return mcrypt_create_iv($bytes, MCRYPT_DEV_URANDOM);
+        $supported = false;
+        if (function_exists('mcrypt_create_iv')) {
+            $supported = true;
+        }
+
+        return $supported;
+    }
+
+    /**
+     * Get the source priority.
+     *
+     * @return integer Returns an integer indicating the priority of the source.
+     *     Lower numbers represent lower priorities.
+     */
+    public static function getPriority()
+    {
+        return SourceInterface::PRIORITY_HIGH;
     }
 
 }

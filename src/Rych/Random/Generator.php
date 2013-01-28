@@ -30,6 +30,12 @@ class Generator
      */
     private $source;
 
+    /**
+     * Class constructor.
+     *
+     * @param SourceInterface $source A valid instance of SourceInterface.
+     * @return void
+     */
     public function __construct(SourceInterface $source = null)
     {
         if ($source) {
@@ -37,6 +43,15 @@ class Generator
         }
     }
 
+    /**
+     * Get the currently registered source.
+     *
+     * If a source is not registered, the best available source will be selected
+     * by {@link Factory}.
+     *
+     * @return SourceInterface Returns the currently registered source.
+     * @uses Factory Used if a source has not been previously registered.
+     */
     public function getSource()
     {
         if (!$this->source) {
@@ -47,6 +62,12 @@ class Generator
         return $this->source;
     }
 
+    /**
+     * Register a source.
+     *
+     * @param SourceInterface $source A valid instance of SourceInterface.
+     * @return self
+     */
     public function setSource(SourceInterface $source)
     {
         $this->source = $source;
@@ -54,6 +75,12 @@ class Generator
         return $this;
     }
 
+    /**
+     * Generate a string of random data.
+     *
+     * @param integer $byteCount The desired number of bytes.
+     * @return string Returns the generated string.
+     */
     public function generate($byteCount)
     {
         return $this->getSource()->getBytes($byteCount);

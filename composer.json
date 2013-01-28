@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Random data generator for PHP",
     "keywords": ["random"],
-    "homepage": "https://bitbucket.org/rchouinard/rych-random",
+    "homepage": "https://github.com/rchouinard/rych-random",
     "license": "MIT",
     "authors": [
         {

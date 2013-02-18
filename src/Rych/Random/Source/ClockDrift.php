@@ -15,6 +15,11 @@ use Rych\Random\SourceInterface;
 /**
  * Clock drift algorithm random data source
  *
+ * This source provides a pure PHP CSPRNG. It gathers entropy by measuring the
+ * time it takes to calculate a number of SHA-1 hashes. This is a very slow
+ * source, and it shold only be used in cases where better sources are
+ * unavailable.
+ *
  * Taken from https://github.com/GeorgeArgyros/Secure-random-bytes-in-PHP with
  * permission.
  *

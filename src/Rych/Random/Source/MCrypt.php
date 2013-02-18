@@ -15,6 +15,11 @@ use Rych\Random\SourceInterface;
 /**
  * MCrypt random data source
  *
+ * This source provides an interface to the mcrypt extension. The extension
+ * simply wraps the operating system's built-in CSPRNG. On Windows platforms,
+ * that means using Microsoft's CryptoAPI. Non-Windows platforms will read from
+ * /dev/urandom.
+ *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
  * @copyright Copyright (c) 2013, Ryan Chouinard

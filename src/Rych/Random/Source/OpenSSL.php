@@ -15,11 +15,16 @@ use Rych\Random\SourceInterface;
 /**
  * OpenSSL random data source
  *
- * This source requires the OpenSSL extension to be loaded in order to work.
- * It should be noted that this source does require PHP versions >= 5.3.7 on
- * Windows, due to a bug in the OpenSSL extension which could lead to very
- * slow performance or hangs under some circumstances.
+ * This source provides an interface to the openssl extension. On most platform,
+ * the extension will use the CSPRNG provided by the OpenSSL library. Due to a
+ * bug in the extension, this source is unavailable on PHP versions < 5.3.7 on
+ * Windows platforms. These buggy versions attempted to gather additional
+ * entropy from an attached display device. While this worked fine on
+ * workstations, this would cause headless servers to run very slowly or hang.
  *
+ * The behavior of the openssl extension on Windows was modified further
+ * starting with PHP 5.4.0 to bypass the OpenSSL CSPRNG completely and use
+ * Windows' built-in CSPRNG instead via Microsoft's CryptoAPI.
  *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
@@ -61,7 +66,7 @@ class OpenSSL implements SourceInterface
      * versions < 5.3.7 on Windows.
      *
      * The OpenSSL function this source uses simply wraps Microsoft's CryptoAPI
-     * on PHP versions >= 5.3.7 on Windows. It should be noted that this is also
+     * on PHP versions >= 5.4.0 on Windows. It should be noted that this is also
      * exactly how the MCrypt source operates on Windows.
      *
      * @return boolean Returns true if the source is supported on the current

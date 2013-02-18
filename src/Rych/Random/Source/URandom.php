@@ -15,6 +15,14 @@ use Rych\Random\SourceInterface;
 /**
  * /dev/urandom random data source
  *
+ * This source simply reads from /dev/urandom. it is only supported on
+ * non-Windows platforms which provide the interface.
+ *
+ * The /dev/urandom special file provides a stream of cryptographically secure
+ * pseudo-random bytes. It is the non-blocking version of /dev/random. More
+ * information may be found at {@link http://en.wikipedia.org/wiki//dev/random
+ * Wikipedia}.
+ *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
  * @copyright Copyright (c) 2013, Ryan Chouinard

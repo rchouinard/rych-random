@@ -8,22 +8,20 @@
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
 
-namespace Rych\Random\Source;
-
-use Rych\Random\SourceInterface;
+namespace Rych\Random\Generator;
 
 /**
- * Mock random data source
+ * Mock random data generator
  *
- * This source is used in testing. It always reports that it is not supported,
- * so it cannot be picked up by the factory automatically.
+ * This generator is used in testing. It always reports that it is not
+ * supported, so it cannot be picked up by the factory automatically.
  *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
  * @copyright Copyright (c) 2013, Ryan Chouinard
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
-class Mock implements SourceInterface
+class MockGenerator implements GeneratorInterface
 {
 
     /**
@@ -48,7 +46,7 @@ class Mock implements SourceInterface
      * @param integer $byteCount The desired number of bytes.
      * @return string Returns the generated string.
      */
-    public function getBytes($byteCount)
+    public function generate($byteCount)
     {
         $bytes = '';
 
@@ -64,9 +62,9 @@ class Mock implements SourceInterface
     }
 
     /**
-     * Test system support for this source.
+     * Test system support for this generator.
      *
-     * @return boolean Returns true if the source is supported on the current
+     * @return boolean Returns true if the generator is supported on the current
      *     platform, otherwise false.
      */
     public static function isSupported()
@@ -75,14 +73,14 @@ class Mock implements SourceInterface
     }
 
     /**
-     * Get the source priority.
+     * Get the generator priority.
      *
-     * @return integer Returns an integer indicating the priority of the source.
-     *     Lower numbers represent lower priorities.
+     * @return integer Returns an integer indicating the priority of the
+     *     generator. Lower numbers represent lower priorities.
      */
     public static function getPriority()
     {
-        return SourceInterface::PRIORITY_LOW;
+        return GeneratorInterface::PRIORITY_LOW;
     }
 
 }

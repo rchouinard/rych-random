@@ -8,14 +8,12 @@
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
 
-namespace Rych\Random\Source;
-
-use Rych\Random\SourceInterface;
+namespace Rych\Random\Generator;
 
 /**
- * MCrypt random data source
+ * MCrypt random data generator
  *
- * This source provides an interface to the mcrypt extension. The extension
+ * This generator provides an interface to the mcrypt extension. The extension
  * simply wraps the operating system's built-in CSPRNG. On Windows platforms,
  * that means using Microsoft's CryptoAPI. Non-Windows platforms will read from
  * /dev/urandom.
@@ -25,7 +23,7 @@ use Rych\Random\SourceInterface;
  * @copyright Copyright (c) 2013, Ryan Chouinard
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
-class MCrypt implements SourceInterface
+class MCryptGenerator implements GeneratorInterface
 {
 
     /**
@@ -34,7 +32,7 @@ class MCrypt implements SourceInterface
      * @param integer $byteCount The desired number of bytes.
      * @return string Returns the generated string.
      */
-    public function getBytes($byteCount)
+    public function generate($byteCount)
     {
         $bytes = '';
 
@@ -49,9 +47,9 @@ class MCrypt implements SourceInterface
     }
 
     /**
-     * Test system support for this source.
+     * Test system support for this generator.
      *
-     * @return boolean Returns true if the source is supported on the current
+     * @return boolean Returns true if the generator is supported on the current
      *     platform, otherwise false.
      */
     public static function isSupported()
@@ -65,14 +63,14 @@ class MCrypt implements SourceInterface
     }
 
     /**
-     * Get the source priority.
+     * Get the generator priority.
      *
-     * @return integer Returns an integer indicating the priority of the source.
-     *     Lower numbers represent lower priorities.
+     * @return integer Returns an integer indicating the priority of the
+     *     generator. Lower numbers represent lower priorities.
      */
     public static function getPriority()
     {
-        return SourceInterface::PRIORITY_HIGH;
+        return GeneratorInterface::PRIORITY_HIGH;
     }
 
 }

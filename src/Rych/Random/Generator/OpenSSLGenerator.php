@@ -8,19 +8,18 @@
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
 
-namespace Rych\Random\Source;
-
-use Rych\Random\SourceInterface;
+namespace Rych\Random\Generator;
 
 /**
- * OpenSSL random data source
+ * OpenSSL random data generator
  *
- * This source provides an interface to the openssl extension. On most platform,
- * the extension will use the CSPRNG provided by the OpenSSL library. Due to a
- * bug in the extension, this source is unavailable on PHP versions < 5.3.7 on
- * Windows platforms. These buggy versions attempted to gather additional
- * entropy from an attached display device. While this worked fine on
- * workstations, this would cause headless servers to run very slowly or hang.
+ * This generator provides an interface to the openssl extension. On most
+ * platforms, the extension will use the CSPRNG provided by the OpenSSL library.
+ * Due to a bug in the extension, this generator is unavailable on PHP
+ * versions < 5.3.7 on Windows platforms. These buggy versions attempted to
+ * gather additional entropy from an attached display device. While this worked
+ * fine on workstations, this would cause headless servers to run very slowly
+ * or hang.
  *
  * The behavior of the openssl extension on Windows was modified further
  * starting with PHP 5.4.0 to bypass the OpenSSL CSPRNG completely and use
@@ -31,7 +30,7 @@ use Rych\Random\SourceInterface;
  * @copyright Copyright (c) 2013, Ryan Chouinard
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
-class OpenSSL implements SourceInterface
+class OpenSSLGenerator implements GeneratorInterface
 {
 
     /**
@@ -40,7 +39,7 @@ class OpenSSL implements SourceInterface
      * @param integer $byteCount The desired number of bytes.
      * @return string Returns the generated string.
      */
-    public function getBytes($byteCount)
+    public function generate($byteCount)
     {
         $bytes = '';
 
@@ -57,19 +56,19 @@ class OpenSSL implements SourceInterface
     }
 
     /**
-     * Test system support for this source.
+     * Test system support for this generator.
      *
      * PHP versions prior to 5.3.7 have a bug in the Windows implementation of
-     * this source. The implementation used OpenSSL functions which could cause
-     * blocking for an indefinite period of time on headless non-interactive
-     * Windows servers. Because of this, the source is not supported for PHP
-     * versions < 5.3.7 on Windows.
+     * this generator. The implementation used OpenSSL functions which could
+     * cause blocking for an indefinite period of time on headless
+     * non-interactive Windows servers. Because of this, the generator is not
+     * supported for PHP versions < 5.3.7 on Windows.
      *
-     * The OpenSSL function this source uses simply wraps Microsoft's CryptoAPI
-     * on PHP versions >= 5.4.0 on Windows. It should be noted that this is also
-     * exactly how the MCrypt source operates on Windows.
+     * The OpenSSL function this generator uses simply wraps Microsoft's
+     * CryptoAPI on PHP versions >= 5.4.0 on Windows. It should be noted that
+     * this is also exactly how the MCrypt generator operates on Windows.
      *
-     * @return boolean Returns true if the source is supported on the current
+     * @return boolean Returns true if the generator is supported on the current
      *     platform, otherwise false.
      */
     public static function isSupported()
@@ -85,14 +84,14 @@ class OpenSSL implements SourceInterface
     }
 
     /**
-     * Get the source priority.
+     * Get the generator priority.
      *
-     * @return integer Returns an integer indicating the priority of the source.
-     *     Lower numbers represent lower priorities.
+     * @return integer Returns an integer indicating the priority of the
+     *     generator. Lower numbers represent lower priorities.
      */
     public static function getPriority()
     {
-        return SourceInterface::PRIORITY_HIGH;
+        return GeneratorInterface::PRIORITY_HIGH;
     }
 
 }

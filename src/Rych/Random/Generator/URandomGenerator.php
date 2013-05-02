@@ -8,14 +8,12 @@
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
 
-namespace Rych\Random\Source;
-
-use Rych\Random\SourceInterface;
+namespace Rych\Random\Generator;
 
 /**
- * /dev/urandom random data source
+ * /dev/urandom random data generator
  *
- * This source simply reads from /dev/urandom. it is only supported on
+ * This generator simply reads from /dev/urandom. it is only supported on
  * non-Windows platforms which provide the interface.
  *
  * The /dev/urandom special file provides a stream of cryptographically secure
@@ -28,7 +26,7 @@ use Rych\Random\SourceInterface;
  * @copyright Copyright (c) 2013, Ryan Chouinard
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
-class URandom implements SourceInterface
+class URandomGenerator implements GeneratorInterface
 {
 
     /**
@@ -42,7 +40,7 @@ class URandom implements SourceInterface
      * @param integer $byteCount The desired number of bytes.
      * @return string Returns the generated string.
      */
-    public function getBytes($byteCount)
+    public function generate($byteCount)
     {
         $bytes = '';
 
@@ -63,9 +61,9 @@ class URandom implements SourceInterface
     }
 
     /**
-     * Test system support for this source.
+     * Test system support for this generator.
      *
-     * @return boolean Returns true if the source is supported on the current
+     * @return boolean Returns true if the generator is supported on the current
      *     platform, otherwise false.
      */
     public static function isSupported()
@@ -83,14 +81,14 @@ class URandom implements SourceInterface
     }
 
     /**
-     * Get the source priority.
+     * Get the generator priority.
      *
-     * @return integer Returns an integer indicating the priority of the source.
-     *     Lower numbers represent lower priorities.
+     * @return integer Returns an integer indicating the priority of the
+     *     generator. Lower numbers represent lower priorities.
      */
     public static function getPriority()
     {
-        return SourceInterface::PRIORITY_MEDIUM;
+        return GeneratorInterface::PRIORITY_MEDIUM;
     }
 
 }

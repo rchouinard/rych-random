@@ -8,16 +8,14 @@
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
 
-namespace Rych\Random\Source;
-
-use Rych\Random\SourceInterface;
+namespace Rych\Random\Generator;
 
 /**
- * Clock drift algorithm random data source
+ * Clock drift algorithm random data generator
  *
- * This source provides a pure PHP CSPRNG. It gathers entropy by measuring the
- * time it takes to calculate a number of SHA-1 hashes. This is a very slow
- * source, and it shold only be used in cases where better sources are
+ * This generator provides a pure PHP CSPRNG. It gathers entropy by measuring
+ * the time it takes to calculate a number of SHA-1 hashes. This is a very slow
+ * generator, and it shold only be used in cases where better generators are
  * unavailable.
  *
  * Taken from https://github.com/GeorgeArgyros/Secure-random-bytes-in-PHP with
@@ -28,7 +26,7 @@ use Rych\Random\SourceInterface;
  * @copyright Copyright (c) 2013, Ryan Chouinard
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
-class ClockDrift implements SourceInterface
+class ClockDriftGenerator implements GeneratorInterface
 {
 
     /**
@@ -37,7 +35,7 @@ class ClockDrift implements SourceInterface
      * @param integer $byteCount The desired number of bytes.
      * @return string Returns the generated string.
      */
-    public function getBytes($byteCount)
+    public function generate($byteCount)
     {
         $bitsPerRound = 2;
         $msecPerRound = 400;
@@ -85,11 +83,12 @@ class ClockDrift implements SourceInterface
     }
 
     /**
-     * Test system support for this source.
+     * Test system support for this generator.
      *
-     * There are no dependencies for this source, so it's universally supported.
+     * There are no dependencies for this generator, so it's universally
+     * supported.
      *
-     * @return boolean Returns true if the source is supported on the current
+     * @return boolean Returns true if the generator is supported on the current
      *     platform, otherwise false.
      */
     public static function isSupported()
@@ -98,18 +97,18 @@ class ClockDrift implements SourceInterface
     }
 
     /**
-     * Get the source priority.
+     * Get the generator priority.
      *
-     * The algorithm used in this source is very slow. As such, it has a low
-     * priority. Ideally, this source should only be used as a fallback when
+     * The algorithm used in this generator is very slow. As such, it has a low
+     * priority. Ideally, this generator should only be used as a fallback when
      * no others are available.
      *
-     * @return integer Returns an integer indicating the priority of the source.
-     *     Lower numbers represent lower priorities.
+     * @return integer Returns an integer indicating the priority of the
+     *     generator. Lower numbers represent lower priorities.
      */
     public static function getPriority()
     {
-        return SourceInterface::PRIORITY_LOW;
+        return GeneratorInterface::PRIORITY_LOW;
     }
 
 }

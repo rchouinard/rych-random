@@ -53,8 +53,54 @@ class Random
             $generator = $factory->getGenerator();
         }
 
+        $this->setEncoder($encoder);
+        $this->setGenerator($generator);
+    }
+
+    /**
+     * Get the currently registered encoder instance.
+     *
+     * @return \Rych\Random\Encoder\EncoderInterface
+     */
+    public function getEncoder()
+    {
+        return $this->encoder;
+    }
+
+    /**
+     * Set an encoder instance.
+     *
+     * @param \Rych\Random\Encoder\EncoderInterface $encoder
+     * @return \Rych\Random\Random
+     */
+    public function setEncoder(Encoder\EncoderInterface $encoder)
+    {
         $this->encoder = $encoder;
+
+        return $this;
+    }
+
+    /**
+     * Get the currently registered generator instance.
+     *
+     * @return \Rych\Random\Generator\GeneratorInstance
+     */
+    public function getGenerator()
+    {
+        return $this->generator;
+    }
+
+    /**
+     * Set a generator instance.
+     *
+     * @param \Rych\Random\Generator\GeneratorInterface $generator
+     * @return \Rych\Random\Random
+     */
+    public function setGenerator(Generator\GeneratorInterface $generator)
+    {
         $this->generator = $generator;
+
+        return $this;
     }
 
     /**

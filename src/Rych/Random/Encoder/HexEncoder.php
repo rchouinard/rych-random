@@ -40,6 +40,8 @@ class HexEncoder implements EncoderInterface
      */
     public function decode($string)
     {
+        $string = preg_replace('/[^0-9a-f]/i', '', $string);
+
         // hex2bin was not introduced until PHP 5.4
         return pack('H*' , $string);
     }

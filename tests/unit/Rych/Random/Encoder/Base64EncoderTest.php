@@ -7,32 +7,58 @@ use PHPUnit_Framework_TestCase as TestCase;
 class Base64EncoderTest extends TestCase
 {
 
-    public function testEncodeMethodPrducesExpectedResult()
-    {
-        $encoder = new Base64Encoder;
+    /**
+     * @var \Rych\Random\Encoder\EncoderInterface
+     */
+    protected $encoder;
 
-        // RFC 4648 test vectors
-        $this->assertEquals('', $encoder->encode(''));
-        $this->assertEquals('Zg==', $encoder->encode('f'));
-        $this->assertEquals('Zm8=', $encoder->encode('fo'));
-        $this->assertEquals('Zm9v', $encoder->encode('foo'));
-        $this->assertEquals('Zm9vYg==', $encoder->encode('foob'));
-        $this->assertEquals('Zm9vYmE=', $encoder->encode('fooba'));
-        $this->assertEquals('Zm9vYmFy', $encoder->encode('foobar'));
+    /**
+     * @return void
+     */
+    protected function setUp()
+    {
+        $this->encoder = new Base64Encoder;
     }
 
-    public function testDecodeMethodProducesExpectedResult()
+    /**
+     * @return array
+     */
+    public function vectorProvider()
     {
-        $encoder = new Base64Encoder;
+        return array (
+            // Encoded, Decoded
+            array ('', ''),
+            array ('Zg==', 'f'),
+            array ('Zm8=', 'fo'),
+            array ('Zm9v', 'foo'),
+            array ('Zm9vYg==', 'foob'),
+            array ('Zm9vYmE=', 'fooba'),
+            array ('Zm9vYmFy', 'foobar'),
+        );
+    }
 
-        // RFC 4648 test vectors
-        $this->assertEquals('', $encoder->decode(''));
-        $this->assertEquals('f', $encoder->decode('Zg=='));
-        $this->assertEquals('fo', $encoder->decode('Zm8='));
-        $this->assertEquals('foo', $encoder->decode('Zm9v'));
-        $this->assertEquals('foob', $encoder->decode('Zm9vYg=='));
-        $this->assertEquals('fooba', $encoder->decode('Zm9vYmE='));
-        $this->assertEquals('foobar', $encoder->decode('Zm9vYmFy'));
+    /**
+     * @dataProvider vectorProvider()
+     * @test
+     * @param string $encoded
+     * @param string $decoded
+     * @return void
+     */
+    public function testEncodeMethodPrducesExpectedResult($encoded, $decoded)
+    {
+        $this->assertEquals($encoded, $this->encoder->encode($decoded));
+    }
+
+    /**
+     * @dataProvider vectorProvider()
+     * @test
+     * @param string $encoded
+     * @param string $decoded
+     * @return void
+     */
+    public function testDecodeMethodProducesExpectedResult($encoded, $decoded)
+    {
+        $this->assertEquals($decoded, $this->encoder->decode($encoded));
     }
 
 }

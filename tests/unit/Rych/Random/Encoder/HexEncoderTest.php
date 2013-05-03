@@ -7,24 +7,58 @@ use PHPUnit_Framework_TestCase as TestCase;
 class HexEncoderTest extends TestCase
 {
 
-    public function testEncodeMethodPrducesExpectedResult()
+    /**
+     * @var \Rych\Random\Encoder\EncoderInterface
+     */
+    protected $encoder;
+
+    /**
+     * @return void
+     */
+    protected function setUp()
     {
-        $encoder = new HexEncoder;
-        $this->assertEquals('', $encoder->encode(''));
-        $this->assertEquals('41', $encoder->encode('A'));
-        $this->assertEquals('4142', $encoder->encode('AB'));
-        $this->assertEquals('414243', $encoder->encode('ABC'));
-        $this->assertEquals('41424344', $encoder->encode('ABCD'));
+        $this->encoder = new HexEncoder;
     }
 
-    public function testDecodeMethodProducesExpectedResult()
+    /**
+     * @return array
+     */
+    public function vectorProvider()
     {
-        $encoder = new HexEncoder;
-        $this->assertEquals('', $encoder->decode(''));
-        $this->assertEquals('A', $encoder->decode('41'));
-        $this->assertEquals('AB', $encoder->decode('4142'));
-        $this->assertEquals('ABC', $encoder->decode('414243'));
-        $this->assertEquals('ABCD', $encoder->decode('41424344'));
+        return array (
+            // Encoded, Decoded
+            array ('', ''),
+            array ('66', 'f'),
+            array ('666f', 'fo'),
+            array ('666f6f', 'foo'),
+            array ('666f6f62', 'foob'),
+            array ('666f6f6261', 'fooba'),
+            array ('666f6f626172', 'foobar'),
+        );
+    }
+
+    /**
+     * @dataProvider vectorProvider()
+     * @test
+     * @param string $encoded
+     * @param string $decoded
+     * @return void
+     */
+    public function testEncodeMethodPrducesExpectedResult($encoded, $decoded)
+    {
+        $this->assertEquals($encoded, $this->encoder->encode($decoded));
+    }
+
+    /**
+     * @dataProvider vectorProvider()
+     * @test
+     * @param string $encoded
+     * @param string $decoded
+     * @return void
+     */
+    public function testDecodeMethodProducesExpectedResult($encoded, $decoded)
+    {
+        $this->assertEquals($decoded, $this->encoder->decode($encoded));
     }
 
 }

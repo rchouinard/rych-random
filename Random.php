@@ -25,20 +25,20 @@ class Random
 {
 
     /**
-     * @var Rych\Random\Encoder\EncoderInterface
+     * @var \Rych\Random\Encoder\EncoderInterface
      */
     protected $encoder;
 
     /**
-     * @var Rych\Random\GeneratorInterface
+     * @var \Rych\Random\GeneratorInterface
      */
     protected $generator;
 
     /**
      * Class constructor.
      *
-     * @param Rych\Random\Generator\GeneratorInterface $generator
-     * @param Rych\Random\Encoder\EncoderInterface $encoder
+     * @param \Rych\Random\Generator\GeneratorInterface $generator
+     * @param \Rych\Random\Encoder\EncoderInterface $encoder
      * @return void
      */
     public function __construct(GeneratorInterface $generator = null, EncoderInterface $encoder = null)

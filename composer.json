@@ -2,7 +2,7 @@
     "name": "rych/random",
     "type": "library",
     "description": "Random data generator for PHP",
-    "keywords": ["random"],
+    "keywords": ["cryptography", "random"],
     "homepage": "https://github.com/rchouinard/rych-random",
     "license": "MIT",
     "authors": [

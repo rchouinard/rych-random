@@ -19,6 +19,19 @@ $randomBytes = $random->getRandomBytes(16);
 ```
 
 
+Installation
+------------
+
+Install using [Composer](http://getcomposer.org/):
+```json
+{
+  "require" {
+    "rych/random": "1.0@dev"
+  }
+}
+```
+
+
 Generators
 ----------
 

@@ -2,14 +2,14 @@
 <phpunit colors="true" bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="Rych Random Test Suite">
-            <directory suffix="Test.php" phpVersion="5.3.4" phpVersionOperator=">=">./src/Rych/Random/Tests/</directory>
+            <directory suffix="Test.php" phpVersion="5.3.4" phpVersionOperator=">=">./Tests/</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
-            <directory>./src/Rych/Random/</directory>
+            <directory>./</directory>
             <exclude>
-                <directory>./src/Rych/Random/Tests</directory>
+                <directory>./Tests</directory>
                 <directory>./vendor</directory>
             </exclude>
         </whitelist>

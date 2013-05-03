@@ -1,16 +1,4 @@
-# Eclipse
-.settings/
-.buildpath
-.project
-
-# NetBeans
-nbproject/
-
-# PHPUnit
-phpunit.xml
-logs/
-
-# Composer
-composer.phar
-composer.lock
+nbproject/private/
 vendor/
+composer.lock
+phpunit.xml

@@ -26,7 +26,7 @@ Install using [Composer](http://getcomposer.org/):
 ```json
 {
   "require" {
-    "rych/random": "1.0@dev"
+    "rych/random": "1.0.*@dev"
   }
 }
 ```

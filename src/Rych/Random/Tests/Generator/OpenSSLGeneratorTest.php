@@ -1,7 +1,8 @@
 <?php
 
-namespace Rych\Random\Generator;
+namespace Rych\Random\Tests\Generator;
 
+use Rych\Random\Generator\OpenSSLGenerator;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class OpenSSLGeneratorTest extends TestCase

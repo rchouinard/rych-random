@@ -1,22 +1,23 @@
 <?php
 
-namespace Rych\Random\Generator;
+namespace Rych\Random\Tests\Generator;
 
+use Rych\Random\Generator\CapicomGenerator;
 use PHPUnit_Framework_TestCase as TestCase;
 
-class ClockDriftGeneratorTest extends TestCase
+class CapicomGeneratorTest extends TestCase
 {
 
     protected function setUp()
     {
-        if (!ClockDriftGenerator::isSupported()) {
-            $this->markTestSkipped('Clock drift is not supported on this platform.');
+        if (!CapicomGenerator::isSupported()) {
+            $this->markTestSkipped('CAPICOM is not supported on this platform.');
         }
     }
 
     public function testGenerateMethodProducesVaryingResultsEachCall()
     {
-        $generator = new ClockDriftGenerator;
+        $generator = new CapicomGenerator;
         $previous = array ();
         for ($i = 0; $i < 10; ++$i) {
             $result = $generator->generate(8);

@@ -1,22 +1,23 @@
 <?php
 
-namespace Rych\Random\Generator;
+namespace Rych\Random\Tests\Generator;
 
+use Rych\Random\Generator\ClockDriftGenerator;
 use PHPUnit_Framework_TestCase as TestCase;
 
-class MCryptGeneratorTest extends TestCase
+class ClockDriftGeneratorTest extends TestCase
 {
 
     protected function setUp()
     {
-        if (!MCryptGenerator::isSupported()) {
-            $this->markTestSkipped('mcrypt is not supported on this platform.');
+        if (!ClockDriftGenerator::isSupported()) {
+            $this->markTestSkipped('Clock drift is not supported on this platform.');
         }
     }
 
     public function testGenerateMethodProducesVaryingResultsEachCall()
     {
-        $generator = new MCryptGenerator;
+        $generator = new ClockDriftGenerator;
         $previous = array ();
         for ($i = 0; $i < 10; ++$i) {
             $result = $generator->generate(8);

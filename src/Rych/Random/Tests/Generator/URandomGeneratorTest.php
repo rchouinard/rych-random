@@ -1,7 +1,8 @@
 <?php
 
-namespace Rych\Random\Generator;
+namespace Rych\Random\Tests\Generator;
 
+use Rych\Random\Generator\URandomGenerator;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class URandomGeneratorTest extends TestCase

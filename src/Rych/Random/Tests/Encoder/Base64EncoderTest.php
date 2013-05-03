@@ -1,10 +1,11 @@
 <?php
 
-namespace Rych\Random\Encoder;
+namespace Rych\Random\Tests\Encoder;
 
+use Rych\Random\Encoder\Base64Encoder;
 use PHPUnit_Framework_TestCase as TestCase;
 
-class HexEncoderTest extends TestCase
+class Base64EncoderTest extends TestCase
 {
 
     /**
@@ -17,7 +18,7 @@ class HexEncoderTest extends TestCase
      */
     protected function setUp()
     {
-        $this->encoder = new HexEncoder;
+        $this->encoder = new Base64Encoder;
     }
 
     /**
@@ -28,12 +29,12 @@ class HexEncoderTest extends TestCase
         return array (
             // Encoded, Decoded
             array ('', ''),
-            array ('66', 'f'),
-            array ('666f', 'fo'),
-            array ('666f6f', 'foo'),
-            array ('666f6f62', 'foob'),
-            array ('666f6f6261', 'fooba'),
-            array ('666f6f626172', 'foobar'),
+            array ('Zg==', 'f'),
+            array ('Zm8=', 'fo'),
+            array ('Zm9v', 'foo'),
+            array ('Zm9vYg==', 'foob'),
+            array ('Zm9vYmE=', 'fooba'),
+            array ('Zm9vYmFy', 'foobar'),
         );
     }
 

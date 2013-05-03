@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" verbose="true" bootstrap="tests/bootstrap.php">
+<phpunit colors="true" bootstrap="vendor/autoload.php">
     <testsuites>
-        <testsuite name="Rych\Random Tests">
-            <directory suffix="Test.php" phpVersion="5.3.4" phpVersionOperator=">=">./tests</directory>
+        <testsuite name="Rych Random Test Suite">
+            <directory suffix="Test.php" phpVersion="5.3.4" phpVersionOperator=">=">./src/Rych/Random/Tests/</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist>
+            <directory>./src/Rych/Random/</directory>
+            <exclude>
+                <directory>./src/Rych/Random/Tests</directory>
+                <directory>./vendor</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>

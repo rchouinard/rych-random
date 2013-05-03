@@ -1,22 +1,23 @@
 <?php
 
-namespace Rych\Random\Generator;
+namespace Rych\Random\Tests\Generator;
 
+use Rych\Random\Generator\MCryptGenerator;
 use PHPUnit_Framework_TestCase as TestCase;
 
-class CapicomGeneratorTest extends TestCase
+class MCryptGeneratorTest extends TestCase
 {
 
     protected function setUp()
     {
-        if (!CapicomGenerator::isSupported()) {
-            $this->markTestSkipped('CAPICOM is not supported on this platform.');
+        if (!MCryptGenerator::isSupported()) {
+            $this->markTestSkipped('mcrypt is not supported on this platform.');
         }
     }
 
     public function testGenerateMethodProducesVaryingResultsEachCall()
     {
-        $generator = new CapicomGenerator;
+        $generator = new MCryptGenerator;
         $previous = array ();
         for ($i = 0; $i < 10; ++$i) {
             $result = $generator->generate(8);

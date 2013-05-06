@@ -19,17 +19,27 @@ $randomBytes = $random->getRandomBytes(16);
 ```
 
 
-Installation
+Installation via [Composer](http://getcomposer.org/)
 ------------
 
-Install using [Composer](http://getcomposer.org/):
-```json
-{
-  "require" {
-    "rych/random": "1.0.*@dev"
-  }
-}
-```
+ * Install Composer to your project root:
+    ```bash
+    curl -sS https://getcomposer.org/installer | php
+    ```
+
+ * Add a `composer.json` file to your project:
+    ```json
+    {
+      "require" {
+        "rych/random": "1.0.*@dev"
+      }
+    }
+    ```
+
+ * Run the Composer installer:
+    ```bash
+    php composer.phar install
+    ```
 
 
 Generators

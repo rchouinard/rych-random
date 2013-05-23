@@ -186,17 +186,6 @@ class Random
     }
 
     /**
-     * Determine the number of bytes required to represent a given number.
-     *
-     * @param integer $number
-     * @return integer
-     */
-    protected function getBytesInInteger($number)
-    {
-        return $this->getBytesInBits($this->getBitsInInteger($number));
-    }
-
-    /**
      * Determine the number of bytes in the specified number of bits.
      *
      * @param integer $bits

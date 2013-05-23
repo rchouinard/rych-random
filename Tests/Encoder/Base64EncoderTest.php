@@ -1,10 +1,26 @@
 <?php
+/**
+ * Ryan's Random Data Library
+ *
+ * @package Rych\Random
+ * @author Ryan Chouinard <rchouinard@gmail.com>
+ * @copyright Copyright (c) 2013, Ryan Chouinard
+ * @license MIT License - http://www.opensource.org/licenses/mit-license.php
+ */
 
 namespace Rych\Random\Tests\Encoder;
 
 use Rych\Random\Encoder\Base64Encoder;
 use PHPUnit_Framework_TestCase as TestCase;
 
+/**
+ * Base64 encoder tests
+ *
+ * @package Rych\Random
+ * @author Ryan Chouinard <rchouinard@gmail.com>
+ * @copyright Copyright (c) 2013, Ryan Chouinard
+ * @license MIT License - http://www.opensource.org/licenses/mit-license.php
+ */
 class Base64EncoderTest extends TestCase
 {
 
@@ -39,8 +55,8 @@ class Base64EncoderTest extends TestCase
     }
 
     /**
-     * @dataProvider vectorProvider()
      * @test
+     * @dataProvider vectorProvider()
      * @param string $encoded
      * @param string $decoded
      * @return void
@@ -51,8 +67,8 @@ class Base64EncoderTest extends TestCase
     }
 
     /**
-     * @dataProvider vectorProvider()
      * @test
+     * @dataProvider vectorProvider()
      * @param string $encoded
      * @param string $decoded
      * @return void

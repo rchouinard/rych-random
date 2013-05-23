@@ -52,4 +52,16 @@ class RandomTest extends TestCase
         $this->assertEquals('3031323334353637', $random->getRandomBytes(8));
     }
 
+    /**
+     * @test
+     * @return void
+     */
+    public function testConstructorWithNoArgsStillBuildsValidObject()
+    {
+        $random = new Random;
+
+        $this->assertInstanceOf('\\Rych\\Random\\Generator\\GeneratorInterface', $random->getGenerator());
+        $this->assertInstanceOf('\\Rych\\Random\\Encoder\\EncoderInterface', $random->getEncoder());
+    }
+
 }

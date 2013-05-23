@@ -12,6 +12,7 @@
                 <directory>./Tests</directory>
                 <directory>./vendor</directory>
 		<directory suffix="Interface.php">./</directory>
+		<file>Generator/MockGenerator.php</file>
             </exclude>
         </whitelist>
     </filter>

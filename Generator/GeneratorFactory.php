@@ -41,7 +41,6 @@ class GeneratorFactory
     public function __construct()
     {
         $this->addGeneratorPath(__NAMESPACE__, __DIR__);
-        $this->loadGenerators();
     }
 
     /**
@@ -121,6 +120,10 @@ class GeneratorFactory
      */
     public function getGenerator()
     {
+        if (!$this->generators) {
+            $this->loadGenerators();
+        }
+
         $generators = $this->generators;
         usort($generators, function($a, $b) {
             return ($b::getPriority() - $a::getPriority());

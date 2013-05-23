@@ -13,4 +13,7 @@ before_install:
   - composer self-update --no-interaction --ansi
 install:
   - ./.travis.install
-script: vendor/bin/phpunit --configuration phpunit.xml.dist
+script:
+  - vendor/bin/phpunit --configuration phpunit.xml.dist
+after_script:
+  - vendor/bin/coveralls --verbose --no-interaction --ansi

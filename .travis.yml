@@ -10,5 +10,5 @@ env:
   global:
     secure: "2RoFj0l11RstXSJZKtTCGksMRVy2b1ecA0Kp96PM7hbGZ6W3sslvemSD6YWN\nLEbKLZlHrbld98x1z0vXGqMTU6FCaXdYNjym59yOgD8caGBgEzmrs3RmgW5l\n3Q/ZVwB6Ld17tlOrGa6igyJ+P8kWvZP0AcriVZJDW5pH49XEAjU="
 install:
-  - .travis.install
+  - ./.travis.install
 script: vendor/bin/phpunit --configuration phpunit.xml.dist

@@ -1,8 +1,8 @@
-Rych Random Generator
-=====================
+Rych Random Data Library
+========================
 
-This library aims to provide a clean method to generate cryptographically secure
-random data in PHP 5.3+.
+This library aims to provide a clean interface to generating cryptographically
+secure random data in PHP 5.3+.
 
 [![Build Status](https://travis-ci.org/rchouinard/rych-random.png?branch=master)](https://travis-ci.org/rchouinard/rych-random)
 [![Coverage Status](https://coveralls.io/repos/rchouinard/rych-random/badge.png?branch=master)](https://coveralls.io/r/rchouinard/rych-random)
@@ -10,11 +10,36 @@ random data in PHP 5.3+.
 Quick Start
 -----------
 
+The library is easy to get up and running quickly. The best source of random
+data available for your platform will be automatically selected and configured.
+
 ```php
 <?php
+
 $random = new Rych\Random\Random;
 
 // Generate a 16-byte string of random raw data
+$randomBytes = $random->getRandomBytes(16);
+
+// Get a random integer between 1 and 100
+$randomNumber = $random->getRandomInteger(1, 100);
+
+// Get a random 8-character string using the
+// character set A-Za-z0-9./
+$randomString = $random->getRandomString(8);
+```
+
+If you prefer your random bytes delivered in hex format, we can do that too:
+
+```php
+<?php
+
+$encoder = new Rych\Random\Encoder\HexEncoder;
+$random = new Rych\Random\Random;
+$random->setEncoder($encoder);
+
+// Generate a 16-byte string of random raw data,
+// encoded as a 32-character hex string
 $randomBytes = $random->getRandomBytes(16);
 ```
 
@@ -58,7 +83,7 @@ constructor or via the `setGenerator()` method.
 
 The library provides support for several CSPRNGs. The generator factory class
 `Rych\Random\Generator\GeneratorFactory` can be used to automatically discover
-and select the best available option for the currentl platform.
+and select the best available option for the current platform.
 
 #### MCrypt (Rych\Random\Generator\MCryptGenerator)
 

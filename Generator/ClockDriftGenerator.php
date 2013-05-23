@@ -15,7 +15,7 @@ namespace Rych\Random\Generator;
  *
  * This generator provides a pure PHP CSPRNG. It gathers entropy by measuring
  * the time it takes to calculate a number of SHA-1 hashes. This is a very slow
- * generator, and it shold only be used in cases where better generators are
+ * generator, and it should only be used in cases where better generators are
  * unavailable.
  *
  * Taken from https://github.com/GeorgeArgyros/Secure-random-bytes-in-PHP with
@@ -23,6 +23,7 @@ namespace Rych\Random\Generator;
  *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
+ * @author George Argyros
  * @copyright Copyright (c) 2013, Ryan Chouinard
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */

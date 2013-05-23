@@ -62,7 +62,7 @@ class ClockDriftGenerator implements GeneratorInterface
                 $entropy .= $counter1 . $counter2;
             }
 
-            $rounds = (int) ($msecPerRound * 50 / (int) (($counter1 - $counter2) * 1000000));
+            $rounds = (int) ($msecPerRound * 50 / (int) (($counter2 - $counter1) * 1000000));
             $iterations = $bytes * (int) (ceil(8 / $bitsPerRound));
 
             for ($i = 0; $i < $iterations; $i++) {

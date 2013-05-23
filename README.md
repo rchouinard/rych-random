@@ -4,8 +4,8 @@ Rych Random Generator
 This library aims to provide a clean method to generate cryptographically secure
 random data in PHP 5.3+.
 
-Build status: [![Build Status](https://travis-ci.org/rchouinard/rych-random.png?branch=master)](https://travis-ci.org/rchouinard/rych-random)
-
+[![Build Status](https://travis-ci.org/rchouinard/rych-random.png?branch=master)](https://travis-ci.org/rchouinard/rych-random)
+[![Coverage Status](https://coveralls.io/repos/rchouinard/rych-random/badge.png?branch=master)](https://coveralls.io/r/rchouinard/rych-random)
 
 Quick Start
 -----------

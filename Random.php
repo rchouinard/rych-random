@@ -146,19 +146,24 @@ class Random
      * @return string A random string of the specified length, consisting of
      *     characters from the base64 character set.
      */
-    public function getRandomString($length)
+    public function getRandomString($length, $charset = null)
     {
         $length = (int) $length;
-        $charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
+        if (!$charset) {
+            $charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
+        }
+
+        $charsetLength = strlen($charset);
+        $neededBytes = $this->getBytesInBits($length * ($this->getBitsInInteger($charsetLength) + 1));
 
         $string = '';
         do {
-            $byteString = $this->generator->generate($length);
-            for ($i = 0; $i < $length; ++$i) {
-                if (ord($byteString[$i]) > 192) {
+            $byteString = $this->generator->generate($neededBytes);
+            for ($i = 0; $i < $neededBytes; ++$i) {
+                if (ord($byteString[$i]) > (255 - (255 % $charsetLength))) {
                     continue;
                 }
-                $string .= $charset[ord($byteString[$i]) % 64];
+                $string .= $charset[ord($byteString[$i]) % $charsetLength];
             }
         } while (strlen($string) < $length);
 
@@ -167,6 +172,9 @@ class Random
 
     /**
      * Determine the number of bits required to represent a given number.
+     *
+     * For example, the number 64 can be represented in 7 bits (0b1000000),
+     * so this method would return 7.
      *
      * @param integer $number
      * @return integer

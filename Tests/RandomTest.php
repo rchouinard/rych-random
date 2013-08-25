@@ -64,4 +64,17 @@ class RandomTest extends TestCase
         $this->assertInstanceOf('\\Rych\\Random\\Encoder\\EncoderInterface', $random->getEncoder());
     }
 
+    /**
+     * @test
+     * @return void
+     */
+    public function testGetRandomStringMethodUsesCustomCharsets()
+    {
+        $random = new Random;
+
+        $this->assertRegExp('/^[0-9]{10}$/', $random->getRandomString(10, '0123456789'));
+        $this->assertRegExp('/^[qwerty]{10}$/', $random->getRandomString(10, 'qwerty'));
+        $this->assertRegExp('/.{22}/', $random->getRandomString(21) . $random->getRandomString(1, '.Oeu'));
+    }
+
 }

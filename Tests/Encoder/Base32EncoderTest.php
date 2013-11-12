@@ -57,8 +57,8 @@ class Base32EncoderTest extends TestCase
     /**
      * @test
      * @dataProvider vectorProvider()
-     * @param string $encoded
-     * @param string $decoded
+     * @param  string $encoded
+     * @param  string $decoded
      * @return void
      */
     public function testEncodeMethodPrducesExpectedResult($encoded, $decoded)
@@ -69,8 +69,8 @@ class Base32EncoderTest extends TestCase
     /**
      * @test
      * @dataProvider vectorProvider()
-     * @param string $encoded
-     * @param string $decoded
+     * @param  string $encoded
+     * @param  string $decoded
      * @return void
      */
     public function testDecodeMethodProducesExpectedResult($encoded, $decoded)
@@ -79,3 +79,4 @@ class Base32EncoderTest extends TestCase
     }
 
 }
+

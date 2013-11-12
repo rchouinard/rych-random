@@ -61,3 +61,4 @@ class CapicomGeneratorTest extends TestCase
     }
 
 }
+

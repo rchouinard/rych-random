@@ -1,10 +1,26 @@
 <?php
+/**
+ * Ryan's Random Data Library
+ *
+ * @package Rych\Random
+ * @author Ryan Chouinard <rchouinard@gmail.com>
+ * @copyright Copyright (c) 2013, Ryan Chouinard
+ * @license MIT License - http://www.opensource.org/licenses/mit-license.php
+ */
 
 namespace Rych\Random\Tests;
 
 use Rych\Random\Random;
 use PHPUnit_Framework_TestCase as TestCase;
 
+/**
+ * Main class tests
+ *
+ * @package Rych\Random
+ * @author Ryan Chouinard <rchouinard@gmail.com>
+ * @copyright Copyright (c) 2013, Ryan Chouinard
+ * @license MIT License - http://www.opensource.org/licenses/mit-license.php
+ */
 class RandomTest extends TestCase
 {
 
@@ -78,3 +94,4 @@ class RandomTest extends TestCase
     }
 
 }
+

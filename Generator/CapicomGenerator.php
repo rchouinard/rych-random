@@ -28,8 +28,8 @@ class CapicomGenerator implements GeneratorInterface
     /**
      * Generate a string of random data.
      *
-     * @param integer $byteCount The desired number of bytes.
-     * @return string Returns the generated string.
+     * @param  integer $byteCount The desired number of bytes.
+     * @return string  Returns the generated string.
      */
     public function generate($byteCount)
     {

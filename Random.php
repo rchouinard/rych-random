@@ -37,8 +37,8 @@ class Random
     /**
      * Class constructor.
      *
-     * @param \Rych\Random\Generator\GeneratorInterface $generator
-     * @param \Rych\Random\Encoder\EncoderInterface $encoder
+     * @param  \Rych\Random\Generator\GeneratorInterface $generator
+     * @param  \Rych\Random\Encoder\EncoderInterface     $encoder
      * @return void
      */
     public function __construct(GeneratorInterface $generator = null, EncoderInterface $encoder = null)
@@ -70,7 +70,7 @@ class Random
     /**
      * Set an encoder instance.
      *
-     * @param \Rych\Random\Encoder\EncoderInterface $encoder
+     * @param  \Rych\Random\Encoder\EncoderInterface $encoder
      * @return \Rych\Random\Random
      */
     public function setEncoder(Encoder\EncoderInterface $encoder)
@@ -93,7 +93,7 @@ class Random
     /**
      * Set a generator instance.
      *
-     * @param \Rych\Random\Generator\GeneratorInterface $generator
+     * @param  \Rych\Random\Generator\GeneratorInterface $generator
      * @return \Rych\Random\Random
      */
     public function setGenerator(Generator\GeneratorInterface $generator)
@@ -106,8 +106,8 @@ class Random
     /**
      * Get a random raw byte string of the specified length.
      *
-     * @param integer $length The length of the requested string.
-     * @return string A random raw byte string of the specified length.
+     * @param  integer $length The length of the requested string.
+     * @return string  A random raw byte string of the specified length.
      */
     public function getRandomBytes($length)
     {
@@ -117,8 +117,8 @@ class Random
     /**
      * Get a random integer within the specified range.
      *
-     * @param integer $min The minimum expected value. Defaults to 0.
-     * @param integer $max The maximum expected value. Defaults to PHP_INT_MAX.
+     * @param  integer $min The minimum expected value. Defaults to 0.
+     * @param  integer $max The maximum expected value. Defaults to PHP_INT_MAX.
      * @return integer A random integer between the specified values, inclusive.
      */
     public function getRandomInteger($min = 0, $max = PHP_INT_MAX)
@@ -142,8 +142,8 @@ class Random
     /**
      * Get a random string of the specified length.
      *
-     * @param integer $length The length of the requested string.
-     * @return string A random string of the specified length, consisting of
+     * @param  integer $length The length of the requested string.
+     * @return string  A random string of the specified length, consisting of
      *     characters from the base64 character set.
      */
     public function getRandomString($length, $charset = null)
@@ -176,7 +176,7 @@ class Random
      * For example, the number 64 can be represented in 7 bits (0b1000000),
      * so this method would return 7.
      *
-     * @param integer $number
+     * @param  integer $number
      * @return integer
      */
     protected function getBitsInInteger($number)
@@ -196,7 +196,7 @@ class Random
     /**
      * Determine the number of bytes in the specified number of bits.
      *
-     * @param integer $bits
+     * @param  integer $bits
      * @return integer
      */
     protected function getBytesInBits($bits)

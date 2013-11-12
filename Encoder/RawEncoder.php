@@ -24,7 +24,7 @@ class RawEncoder implements EncoderInterface
     /**
      * Encode a string of raw bytes.
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public function encode($string)
@@ -35,7 +35,7 @@ class RawEncoder implements EncoderInterface
     /**
      * Decode an encoded string.
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public function decode($string)
@@ -44,3 +44,4 @@ class RawEncoder implements EncoderInterface
     }
 
 }
+

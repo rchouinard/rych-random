@@ -146,3 +146,4 @@ class GeneratorFactoryTest extends TestCase
     }
 
 }
+

@@ -45,7 +45,7 @@ interface GeneratorInterface
     /**
      * Generate a raw string of random bytes.
      *
-     * @param integer $size
+     * @param  integer $size
      * @return string
      */
     public function generate($size);

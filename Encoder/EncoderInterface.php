@@ -24,7 +24,7 @@ interface EncoderInterface
     /**
      * Encode a string of raw bytes.
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public function encode($string);
@@ -32,9 +32,10 @@ interface EncoderInterface
     /**
      * Decode an encoded string.
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public function decode($string);
 
 }
+

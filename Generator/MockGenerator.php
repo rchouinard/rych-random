@@ -32,7 +32,7 @@ class MockGenerator implements GeneratorInterface
     /**
      * Set the expected fake random data to return.
      *
-     * @param string $string
+     * @param  string $string
      * @return void
      */
     public function setMockString($string)
@@ -43,8 +43,8 @@ class MockGenerator implements GeneratorInterface
     /**
      * Generate a string of random data.
      *
-     * @param integer $byteCount The desired number of bytes.
-     * @return string Returns the generated string.
+     * @param  integer $byteCount The desired number of bytes.
+     * @return string  Returns the generated string.
      */
     public function generate($byteCount)
     {

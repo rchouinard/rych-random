@@ -48,7 +48,7 @@ class GeneratorFactory
      *
      * @param string $prefix Namespace prefix used by generator classes
      *     in this path.
-     * @param string $path Directory path containing generator classes.
+     * @param  string  $path Directory path containing generator classes.
      * @return boolean Returns true on success, false otherwise.
      */
     public function addGeneratorPath($prefix, $path)
@@ -89,7 +89,7 @@ class GeneratorFactory
     /**
      * Remove a registered generator path.
      *
-     * @param type $prefixOrPath The prefix or directory path to remove.
+     * @param  type $prefixOrPath The prefix or directory path to remove.
      * @return self Returns an instance of self for method chaining.
      */
     public function removeGeneratorPath($prefixOrPath)
@@ -97,7 +97,7 @@ class GeneratorFactory
         if (array_key_exists($prefixOrPath, $this->generatorPaths)) {
             $prefix = $prefixOrPath;
             unset($this->generatorPaths[$prefix]);
-        } else if (($prefixOrPath = realpath($prefixOrPath)) && in_array($prefixOrPath, $this->generatorPaths)) {
+        } elseif (($prefixOrPath = realpath($prefixOrPath)) && in_array($prefixOrPath, $this->generatorPaths)) {
             $path = $prefixOrPath;
             $generatorPaths = $this->generatorPaths;
             $this->generatorPaths = array_filter($generatorPaths, function ($value) use ($path) {
@@ -125,7 +125,7 @@ class GeneratorFactory
         }
 
         $generators = $this->generators;
-        usort($generators, function($a, $b) {
+        usort($generators, function ($a, $b) {
             return ($b::getPriority() - $a::getPriority());
         });
 

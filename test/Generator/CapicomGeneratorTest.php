@@ -4,7 +4,7 @@
  *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
- * @copyright Copyright (c) 2013, Ryan Chouinard
+ * @copyright Copyright (c) 2014, Ryan Chouinard
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
 
@@ -18,7 +18,7 @@ use PHPUnit_Framework_TestCase as TestCase;
  *
  * @package Rych\Random
  * @author Ryan Chouinard <rchouinard@gmail.com>
- * @copyright Copyright (c) 2013, Ryan Chouinard
+ * @copyright Copyright (c) 2014, Ryan Chouinard
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  */
 class CapicomGeneratorTest extends TestCase

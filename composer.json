@@ -25,14 +25,8 @@
         "ext-openssl": "*"
     },
     "autoload": {
-        "psr-0": {
-            "Rych\\Random": ""
-        }
-    },
-    "target-dir": "Rych/Random",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
+        "psr-4": {
+            "Rych\\Random\\": "src/"
         }
     }
 }

@@ -44,7 +44,7 @@ class GeneratorFactoryTest extends TestCase
     public function testFactoryHasDefaultGeneratorPath()
     {
         $generatorPrefix = 'Rych\\Random\\Generator';
-        $generatorPath = realpath(__DIR__ . '/../../Generator/');
+        $generatorPath = RYCH_RANDLIB_BASEDIR . '/Generator';
 
         $factoryPaths = $this->factory->getGeneratorPaths();
         $this->assertEquals(1, count($factoryPaths));
@@ -59,7 +59,7 @@ class GeneratorFactoryTest extends TestCase
     public function testFactoryAcceptsAdditionalPaths()
     {
         $newPrefix = 'My\\Custom\\Generator';
-        $newPath = realpath(__DIR__ . '/../fixtures/Generator');
+        $newPath = RYCH_RANDLIB_TESTDIR . '/fixtures/Generator';
 
         $this->factory->addGeneratorPath($newPrefix, $newPath);
 
@@ -76,7 +76,7 @@ class GeneratorFactoryTest extends TestCase
     public function testFactoryCanRemovePathByPrefix()
     {
         $newPrefix = 'My\\Custom\\Generator';
-        $newPath = realpath(__DIR__ . '/../fixtures/Generator');
+        $newPath = RYCH_RANDLIB_TESTDIR . '/fixtures/Generator';
 
         $this->factory->addGeneratorPath($newPrefix, $newPath);
         $this->factory->removeGeneratorPath('Rych\\Random\\Generator');
@@ -94,10 +94,10 @@ class GeneratorFactoryTest extends TestCase
     public function testFactoryCanRemovePathByPath()
     {
         $newPrefix = 'My\\Custom\\Generator';
-        $newPath = realpath(__DIR__ . '/../fixtures/Generator');
+        $newPath = RYCH_RANDLIB_TESTDIR . '/fixtures/Generator';
 
         $this->factory->addGeneratorPath($newPrefix, $newPath);
-        $this->factory->removeGeneratorPath(realpath(__DIR__ . '/../../Generator/'));
+        $this->factory->removeGeneratorPath(RYCH_RANDLIB_BASEDIR . '/Generator');
 
         $factoryPaths = $this->factory->getGeneratorPaths();
         $this->assertEquals(1, count($factoryPaths));
@@ -124,7 +124,7 @@ class GeneratorFactoryTest extends TestCase
     public function testFactoryLoadsOtherGenerators()
     {
         $newPrefix = 'My\\Custom\\Generator';
-        $newPath = realpath(__DIR__ . '/../fixtures/Generator');
+        $newPath = RYCH_RANDLIB_TESTDIR . '/fixtures/Generator';
 
         $this->factory->clearGeneratorPaths();
         $this->factory->addGeneratorPath($newPrefix, $newPath);

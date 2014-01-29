@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" bootstrap="vendor/autoload.php">
+<phpunit colors="true" bootstrap="./test/bootstrap.php">
     <testsuites>
         <testsuite name="Rych Random Test Suite">
-            <directory suffix="Test.php" phpVersion="5.3.4" phpVersionOperator=">=">./Tests/</directory>
+            <directory suffix="Test.php" phpVersion="5.3.4" phpVersionOperator=">=">./test</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
             <directory>./</directory>
             <exclude>
-                <directory>./Tests</directory>
+                <directory>./test</directory>
                 <directory>./vendor</directory>
                 <directory suffix="Interface.php">./</directory>
-                <file>Generator/MockGenerator.php</file>
+                <file>./src/Generator/MockGenerator.php</file>
             </exclude>
         </whitelist>
     </filter>
     <logging>
-        <log type="coverage-clover" target="build/logs/clover.xml" />
+        <log type="coverage-clover" target="./build/logs/clover.xml" />
     </logging>
 </phpunit>

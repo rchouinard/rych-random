@@ -44,7 +44,7 @@ class GeneratorFactoryTest extends TestCase
     public function testFactoryHasDefaultGeneratorPath()
     {
         $generatorPrefix = 'Rych\\Random\\Generator';
-        $generatorPath = realpath(__DIR__ . '/../../Generator/');
+        $generatorPath = realpath(__DIR__ . '/../../src/Generator/');
 
         $factoryPaths = $this->factory->getGeneratorPaths();
         $this->assertEquals(1, count($factoryPaths));
@@ -97,7 +97,7 @@ class GeneratorFactoryTest extends TestCase
         $newPath = realpath(__DIR__ . '/../fixtures/Generator');
 
         $this->factory->addGeneratorPath($newPrefix, $newPath);
-        $this->factory->removeGeneratorPath(realpath(__DIR__ . '/../../Generator/'));
+        $this->factory->removeGeneratorPath(realpath(__DIR__ . '/../../src/Generator/'));
 
         $factoryPaths = $this->factory->getGeneratorPaths();
         $this->assertEquals(1, count($factoryPaths));
